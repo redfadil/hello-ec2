@@ -27,14 +27,16 @@ public class Ec2Application implements ApplicationListener<ApplicationReadyEvent
 	private static String remoteAddress;
 
 	@GetMapping("/whoami")
-	public WhoAmIResponse get() {
-		return WhoAmIResponse.builder()
+	public String get() {
+		WhoAmIResponse whoAmIResponse = WhoAmIResponse.builder()
 				.port(port)
 				.localHostName(localHostName)
 				.localAddress(localAddress)
 				.remoteHostName(remoteHostName)
 				.remoteAddress(remoteAddress)
 				.build();
+
+		return whoAmIResponse.toString();
 	}
 
 	@Override
@@ -55,6 +57,7 @@ public class Ec2Application implements ApplicationListener<ApplicationReadyEvent
 
 	@lombok.Value
 	@lombok.Builder
+	@lombok.ToString
 	public static class WhoAmIResponse {
 		String port;
 		String localHostName;
