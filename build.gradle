@@ -42,3 +42,7 @@ tasks.named('wrapper') {
 task buildImage(type: Exec) {
 	commandLine "./build-image.sh", "${version}"
 }
+
+task pushImage(type: Exec) {
+	commandLine "./push-image.sh", "${version}"
+}
