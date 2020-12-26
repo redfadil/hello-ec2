@@ -1,0 +1,44 @@
+plugins {
+	id 'org.springframework.boot' version '2.4.1'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'java'
+	id 'groovy'
+}
+
+group = 'com.hello'
+version = 1.0
+sourceCompatibility = '15'
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	lombokVersion 		= "1.18.16"
+	spockVersion 		= "1.3-groovy-2.5"
+	springfoxVersion    = "3.0.0"
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.spockframework:spock-core:${spockVersion}")
+	testImplementation("org.spockframework:spock-spring:${spockVersion}")
+
+	implementation "org.projectlombok:lombok:${lombokVersion}"
+	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+	testImplementation "org.projectlombok:lombok:${lombokVersion}"
+	testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+	implementation "io.springfox:springfox-boot-starter:${springfoxVersion}"
+}
+
+tasks.named('wrapper') {
+	version = "6.7.1"
+	distributionType = Wrapper.DistributionType.ALL
+}
+
+task buildImage(type: Exec) {
+	commandLine "./build-image.sh", "${version}"
+}
