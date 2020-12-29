@@ -1,0 +1,4 @@
+spring:
+  application.name: hello-ec2
+
+cloud.aws.region.static: eu-central-1

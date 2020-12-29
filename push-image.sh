@@ -1,1 +1,1 @@
-docker push fadil/hello-ec2:"${1}"
+docker push fadil/hello-ec2:latest

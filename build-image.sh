@@ -1,1 +1,1 @@
-docker build -t fadil/hello-ec2:"${1}" .
+docker build -t fadil/hello-ec2:latest .

@@ -10,14 +10,14 @@ import spock.lang.Specification
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-class Ec2ApplicationTests extends Specification {
+class Ec2ApplicationSpec extends Specification {
 
 	@Autowired
 	private MockMvc mockMvc
 
-	def "when get is performed then the response has status 200 and content is who am I"() {
-		expect: "Status is 200 and the response is who am I"
-		mockMvc.perform(MockMvcRequestBuilders.get(URI.create('/whoami')))
+	def "when GET /instances is called then the response has status 200 and content is describing the instances"() {
+		expect:
+		mockMvc.perform(MockMvcRequestBuilders.get(URI.create('/ec2/instances')))
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andReturn()
 	}

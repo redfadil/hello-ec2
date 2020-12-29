@@ -14,6 +14,7 @@ repositories {
 }
 
 ext {
+	awsEc2Version       = "1.11.926"
 	lombokVersion 		= "1.18.16"
 	spockVersion 		= "1.3-groovy-2.5"
 	springfoxVersion    = "3.0.0"
@@ -25,6 +26,8 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.spockframework:spock-core:${spockVersion}")
 	testImplementation("org.spockframework:spock-spring:${spockVersion}")
+
+	implementation "com.amazonaws:aws-java-sdk-ec2:${awsEc2Version}"
 
 	implementation "org.projectlombok:lombok:${lombokVersion}"
 	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
@@ -40,9 +43,9 @@ tasks.named('wrapper') {
 }
 
 task buildImage(type: Exec) {
-	commandLine "./build-image.sh", "${version}"
+	commandLine "./build-image.sh"
 }
 
 task pushImage(type: Exec) {
-	commandLine "./push-image.sh", "${version}"
+	commandLine "./push-image.sh"
 }
